@@ -1,6 +1,6 @@
   module Iamsure
     class Initiator
-      def initiate(arg)
+      def init(arg)
         raise 'It should be implemented in inherited class'
       end
     end
