@@ -1,3 +1,6 @@
+
+![Travis (.org)](https://img.shields.io/travis/torokmark/iamsure)
+
 # Iamsure
 
 IamSure is a precondition checker by chaining conditions next one another.
