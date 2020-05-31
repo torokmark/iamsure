@@ -1,4 +1,5 @@
 require 'fake_initiator'
+require 'fake_unpacker'
 
 RSpec.describe Iamsure do
   describe '.of' do
@@ -140,6 +141,31 @@ RSpec.describe Iamsure do
   end
 
   describe '#unpack' do
-    context
+    context 'when unpacker is nil' do
+      subject { Iamsure::IamSure.of({}) }
+      it 'raises ArgumentError' do
+        expect { subject.unpack(nil) }.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'when unpacker is not an Unpacker' do
+      subject { Iamsure::IamSure.of({}) }
+      let (:unpacker) { 'some string' }
+
+      it 'raises ArgumentError' do
+        expect { subject.unpack(unpacker) }.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'when unpacker is an Unpacker' do
+      let (:init_value) { {} }
+      let (:unpacker) { FakeUnpacker.new }
+      
+      subject { Iamsure::IamSure.of(init_value) }
+
+      it 'returns unpacked value' do
+        expect( subject.unpack(unpacker) ).to eq("#{ init_value } unpacked")
+      end
+    end
   end
 end
