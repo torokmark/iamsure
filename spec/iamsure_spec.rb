@@ -4,13 +4,13 @@ require 'fake_unpacker'
 RSpec.describe Iamsure do
   describe '.of' do
     it 'creates a new object of Iamsure' do
-      expect(Iamsure::IamSure.of('something')).not_to be_nil
+      expect(IamSure.of('something')).not_to be_nil
     end
   end
 
   describe '#get' do
     context 'when initiator is nil' do
-      subject { Iamsure::IamSure.of({}) }
+      subject { IamSure.of({}) }
       it 'returns the initiated object' do
         expect( subject.get ).to eq({})
       end
@@ -18,7 +18,7 @@ RSpec.describe Iamsure do
 
     context 'when initiator is not nil' do
       context 'and valid initiator' do
-        subject { Iamsure::IamSure.of({}) }
+        subject { IamSure.of({}) }
         let (:initiator) { FakeInitiator.new }
         
         it 'returns the value transformed by initiator' do
@@ -27,7 +27,7 @@ RSpec.describe Iamsure do
       end
 
       context 'and not valid initiator' do
-        subject { Iamsure::IamSure.of(nil) }
+        subject { IamSure.of(nil) }
         it 'raises ArgumentError' do
           expect { subject.get('not initiator') }.to raise_error(ArgumentError)          
         end
@@ -38,14 +38,14 @@ RSpec.describe Iamsure do
 
   describe '#not_nil' do
     context "when object is nil" do
-      subject { Iamsure::IamSure.of(nil) }
+      subject { IamSure.of(nil) }
       it 'raises ArgumentError' do
         expect { subject.not_nil('message') }.to raise_error(ArgumentError)
       end
     end
 
     context 'when object is instance' do
-      subject { Iamsure::IamSure.of({}) }
+      subject { IamSure.of({}) }
       it 'returns self of Iamsure' do
         expect(subject.not_nil).to eq(subject)
       end
@@ -54,21 +54,21 @@ RSpec.describe Iamsure do
 
   describe '#not_empty' do
     context 'when object is nil' do
-      subject { Iamsure::IamSure.of(nil) }
+      subject { IamSure.of(nil) }
       it 'raises ArgumentError' do
         expect { subject.not_empty }.to raise_error(ArgumentError)
       end
     end
 
     context 'when object is empty' do
-      subject { Iamsure::IamSure.of('') }
+      subject { IamSure.of('') }
       it 'raises ArgumentError' do 
         expect { subject.not_empty }.to raise_error(ArgumentError)
       end
     end
 
     context 'when object is instance' do
-      subject { Iamsure::IamSure.of(a: :b) }
+      subject { IamSure.of(a: :b) }
       it 'returns the object' do
         expect(subject.not_empty).to eq(subject)
       end
@@ -77,14 +77,14 @@ RSpec.describe Iamsure do
 
   describe '#exist' do
     context 'when argument is nil' do      
-      subject { Iamsure::IamSure.of(nil) }
+      subject { IamSure.of(nil) }
       it 'raises ArgumentError' do
         expect { subject.exist(nil) }.to raise_error(ArgumentError)
       end
     end
 
     context 'when argument is no Hash' do
-      subject { Iamsure::IamSure.of(nil) }
+      subject { IamSure.of(nil) }
       it 'raises ArgumentError' do
         expect { subject.exist('') }.to raise_error(ArgumentError)
       end
