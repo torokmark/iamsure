@@ -50,6 +50,22 @@ def fun(arg)
     .get(CustomInitiator.new) # => 
 end
 ```
+## Documentation
+
+`IamSure.of(arg): IamSure` creates new instance with the given argument.
+
+`IamSure#not_nil(msg): IamSure` check whether the value is not `nil`.
+
+`IamSure#not_empty(msg): IamSure` check whether the value is not empty.
+
+`IamSure#exist(as): IamSure` check whether the value is file (`as: :file`) or directory (`as: :dir`).
+
+`IamSure#unpack(unpacker): IamSure` transforms the value into a new one.
+
+`IamSure#get(initiator): object` returns the the checked object or its initiated value.
+
+
+
 
 ## Development
 
