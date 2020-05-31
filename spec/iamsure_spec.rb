@@ -1,10 +1,10 @@
 require 'fake_initiator'
 require 'fake_unpacker'
 
-RSpec.describe Iamsure do
+RSpec.describe IamSure do
   describe '.of' do
     it 'creates a new object of Iamsure' do
-      expect(IamSure.of('something')).not_to be_nil
+      expect( IamSure.of('something') ).not_to be_nil
     end
   end
 
@@ -91,7 +91,7 @@ RSpec.describe Iamsure do
     end
 
     context 'when argument is Hash' do
-      subject { Iamsure::IamSure.of(nil) }
+      subject { IamSure.of(nil) }
       context 'and not containing valid key' do
         it 'raises ArgumentError' do
           expect { subject.exist(a: :b) }.to raise_error(ArgumentError)
@@ -108,13 +108,13 @@ RSpec.describe Iamsure do
         context 'and valid value' do
           context 'and initiale value is' do
             context 'existing file' do
-              subject { Iamsure::IamSure.of('./spec/iamsure_spec.rb') }
+              subject { IamSure.of('./spec/iamsure_spec.rb') }
               it 'returns the the object' do
                 expect( subject.exist(as: :file) ).to eq(subject)
               end
             end
             context 'existing dir' do
-              subject { Iamsure::IamSure.of('./') }
+              subject { IamSure.of('./') }
               it 'returns the the object' do
                 expect( subject.exist(as: :dir) ).to eq(subject)
               end
@@ -123,13 +123,13 @@ RSpec.describe Iamsure do
 
           context 'and initiale value is not' do
             context 'existing file' do
-              subject { Iamsure::IamSure.of('./path/somewhere.rb') }
+              subject { IamSure.of('./path/somewhere.rb') }
               it 'raises error' do
                 expect { subject.exist(as: :file) }.to raise_error(ArgumentError)
               end
             end
             context 'existing dir' do
-              subject { Iamsure::IamSure.of('./path/somewhere') }
+              subject { IamSure.of('./path/somewhere') }
               it 'raises error' do
                 expect { subject.exist(as: :dir) }.to raise_error(ArgumentError)
               end
@@ -142,14 +142,14 @@ RSpec.describe Iamsure do
 
   describe '#unpack' do
     context 'when unpacker is nil' do
-      subject { Iamsure::IamSure.of({}) }
+      subject { IamSure.of({}) }
       it 'raises ArgumentError' do
         expect { subject.unpack(nil) }.to raise_error(ArgumentError)
       end
     end
 
     context 'when unpacker is not an Unpacker' do
-      subject { Iamsure::IamSure.of({}) }
+      subject { IamSure.of({}) }
       let (:unpacker) { 'some string' }
 
       it 'raises ArgumentError' do
@@ -161,7 +161,7 @@ RSpec.describe Iamsure do
       let (:init_value) { {} }
       let (:unpacker) { FakeUnpacker.new }
       
-      subject { Iamsure::IamSure.of(init_value) }
+      subject { IamSure.of(init_value) }
 
       it 'returns unpacked value' do
         expect( subject.unpack(unpacker).get ).to eq("#{ init_value } unpacked")

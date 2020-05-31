@@ -40,7 +40,7 @@ class IamSure
 
   def unpack(unpacker)
     raise ArgumentError.new "Argument cannot be nil!" if unpacker.nil?
-    raise ArgumentError.new "Argument should be Unpacker!" unless unpacker.is_a?(Unpacker)
+    raise ArgumentError.new "Argument should be Unpacker!" unless unpacker.is_a?(Iamsure::Unpacker)
 
     @obj = unpacker.unpack(@obj)
 
