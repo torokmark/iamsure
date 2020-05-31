@@ -1,6 +1,6 @@
 
 ![Travis (.org)](https://img.shields.io/travis/torokmark/iamsure)
-
+![Coveralls github](https://img.shields.io/coveralls/github/torokmark/iamsure)
 # Iamsure
 
 IamSure is a precondition checker by chaining conditions next one another.
