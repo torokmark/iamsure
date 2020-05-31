@@ -164,7 +164,7 @@ RSpec.describe Iamsure do
       subject { Iamsure::IamSure.of(init_value) }
 
       it 'returns unpacked value' do
-        expect( subject.unpack(unpacker) ).to eq("#{ init_value } unpacked")
+        expect( subject.unpack(unpacker).get ).to eq("#{ init_value } unpacked")
       end
     end
   end
