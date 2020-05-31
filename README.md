@@ -21,15 +21,17 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-p IamSure.of(input)
-  .not_nil("argument cannot be null")
-  .get # => input
+def fun(arg)
+  IamSure.of(arg)
+    .not_nil("argument cannot be null")
+    .get # => arg
+end
 ```
 
 ```ruby
 class CustomUnpacker < Iamsure::Unpacker
   def unpack(arg)
-    arg.class
+    "#{ arg }/some.rb"
   end
 end
 
@@ -39,12 +41,14 @@ class CustomInitiator < Iamsure::Initiator
   end
 end
 
-p IamSure.of(arg)
-  .not_nil('arg cannot be nil!')
-  .unpack(CustomUnpacker.new)
-  .not_empty("arg cannot be empty")
-  .exist(as: :file)
-  .get(CustomInitiator.new)
+def fun(arg)
+  IamSure.of(arg)
+    .not_nil('arg cannot be nil!')
+    .unpack(CustomUnpacker.new)
+    .not_empty("arg cannot be empty")
+    .exist(as: :file)
+    .get(CustomInitiator.new) # => 
+end
 ```
 
 ## Development
