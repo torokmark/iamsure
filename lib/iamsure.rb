@@ -20,7 +20,7 @@ module Iamsure
     end
 
     def not_empty(msg='')
-      raise ArgumentError.new msg if not obj.nil? && obj.empty?
+      raise ArgumentError.new msg unless obj.nil? || obj.empty?
       self
     end
 
